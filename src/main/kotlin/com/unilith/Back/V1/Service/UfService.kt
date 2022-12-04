@@ -82,7 +82,7 @@ class UfService  {
     }
 
     fun delete(id: Long) {
-        logger.info("Delete one formato ${id} ")
+        logger.info("Delete one uf ${id} ")
         val uf = repository.findById(id)
             .orElseThrow({ ResourceNotFoundException("Objeto não encontrado com o id(${id})!!") })
         repository.delete(uf);

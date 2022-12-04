@@ -6,7 +6,7 @@ interface CustomMapper <O,E>{
 
     fun convertEntity(vo:O):E
 
-    fun convertListVo(listaEntity:ArrayList<E>):ArrayList<O>{
+    fun convertListVo(listaEntity:List<E>):List<O>{
         val lista:ArrayList<O> = ArrayList()
 
         for (entity in listaEntity) {
@@ -17,7 +17,7 @@ interface CustomMapper <O,E>{
         return lista;
     }
 
-    fun convertListEntity(listaVo:ArrayList<O>):ArrayList<E>{
+    fun convertListEntity(listaVo:List<O>):List<E>{
         val lista:ArrayList<E> = ArrayList()
 
         for (vo in listaVo) {
