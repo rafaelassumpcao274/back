@@ -3,7 +3,9 @@ package com.unilith.Back.V1.Mapper.Custom
 import com.unilith.Back.V1.Entity.V1.Cidade
 import com.unilith.Back.V1.Mapper.ICustom.CustomMapper
 import com.unilith.Back.V1.Vo.V1.CidadeVo
+import org.springframework.stereotype.Service
 
+@Service
 class CidadeMapper : CustomMapper<CidadeVo, Cidade> {
 
     lateinit var ufMapper: UfMapper

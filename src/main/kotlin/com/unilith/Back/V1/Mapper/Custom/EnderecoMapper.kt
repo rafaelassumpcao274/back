@@ -3,7 +3,9 @@ package com.unilith.Back.V1.Mapper.Custom
 import com.unilith.Back.V1.Entity.V1.Endereco
 import com.unilith.Back.V1.Mapper.ICustom.CustomMapper
 import com.unilith.Back.V1.Vo.V1.EnderecoVo
+import org.springframework.stereotype.Service
 
+@Service
 class EnderecoMapper:CustomMapper<EnderecoVo,Endereco> {
 
     lateinit var bairroMapper: BairroMapper
