@@ -12,6 +12,7 @@ import com.unilith.Back.V1.Util.AuditoriaUtil
 import com.unilith.Back.V1.Vo.V1.CidadeVo
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.*
 import java.util.logging.Level
 import java.util.logging.Logger
 
@@ -33,8 +34,25 @@ class CidadeService {
     private val logger = Logger.getLogger(CidadeService::class.java.name)
 
 
-    fun findAll(filtro: Filtro): List<CidadeVo> {
+    fun findAll( page: Optional<Int>,
+                dataIni: Optional<Date>,
+                dataAte: Optional<Date>): List<CidadeVo> {
         logger.log(Level.INFO, "Find All Cidade")
+
+        val filtro = Filtro();
+        if(dataIni.isPresent){
+            filtro.dataIni = dataIni.get()
+        }
+
+        if(dataAte.isPresent){
+            filtro.dataAte = dataAte.get()
+        }
+
+        if(page.isPresent){
+            filtro.page= page.get()
+        }
+
+
         val lista:List<Cidade> = repository.findAll()
 
         return cidadeMapper.convertListVo(lista);

@@ -10,9 +10,12 @@ import com.unilith.Back.V1.Repository.BairroRepository
 import com.unilith.Back.V1.Util.AuditoriaUtil
 import com.unilith.Back.V1.Vo.V1.BairroVo
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
+import java.util.*
 import java.util.logging.Level
 import java.util.logging.Logger
 
+@Service
 class BairroService {
 
     lateinit var repository: BairroRepository
@@ -29,8 +32,25 @@ class BairroService {
     private val logger = Logger.getLogger(BairroService::class.java.name)
 
 
-    fun findAll(filtro: Filtro): List<BairroVo> {
+    fun findAll(page: Optional<Int>,
+                dataIni: Optional<Date>,
+                dataAte: Optional<Date>
+    ): List<BairroVo> {
         logger.log(Level.INFO, "Find All Bairro")
+
+        val filtro = Filtro();
+        if(dataIni.isPresent){
+            filtro.dataIni = dataIni.get()
+        }
+
+        if(dataAte.isPresent){
+            filtro.dataAte = dataAte.get()
+        }
+
+        if(page.isPresent){
+            filtro.page= page.get()
+        }
+
         val lista:List<Bairro> = repository.findAll()
 
         return bairroMapper.convertListVo(lista);

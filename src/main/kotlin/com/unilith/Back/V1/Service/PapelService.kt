@@ -9,6 +9,7 @@ import com.unilith.Back.V1.Repository.PapelRepository
 import com.unilith.Back.V1.Vo.V1.PapelVo
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.*
 import java.util.logging.Level
 import java.util.logging.Logger
 
@@ -24,8 +25,22 @@ class PapelService {
     private val logger = Logger.getLogger(PapelService::class.java.name)
 
 
-    fun findAll(filtro: Filtro): List<PapelVo> {
+    fun findAll(page: Optional<Int>,dataIni: Optional<Date>,dataAte: Optional<Date>): List<PapelVo> {
         logger.log(Level.INFO, "Find All Papel")
+        val filtro = Filtro();
+        if(dataIni.isPresent){
+            filtro.dataIni = dataIni.get()
+        }
+
+        if(dataAte.isPresent){
+            filtro.dataAte = dataAte.get()
+        }
+
+        if(page.isPresent){
+            filtro.page= page.get()
+        }
+
+
         val lista = repository.findAll()
         return mapper.convertListVo(lista as ArrayList<Papel>);
 

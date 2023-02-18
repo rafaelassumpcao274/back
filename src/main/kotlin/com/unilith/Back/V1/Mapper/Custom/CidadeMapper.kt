@@ -3,11 +3,13 @@ package com.unilith.Back.V1.Mapper.Custom
 import com.unilith.Back.V1.Entity.V1.Cidade
 import com.unilith.Back.V1.Mapper.ICustom.CustomMapper
 import com.unilith.Back.V1.Vo.V1.CidadeVo
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
 class CidadeMapper : CustomMapper<CidadeVo, Cidade> {
 
+    @Autowired
     lateinit var ufMapper: UfMapper
 
     override fun convertVo(entity: Cidade): CidadeVo {

@@ -1,6 +1,5 @@
 package com.unilith.Back.V1.Controller
 
-import com.unilith.Back.V1.Filtro.Filtro
 import com.unilith.Back.V1.Service.PapelService
 import com.unilith.Back.V1.Vo.V1.PapelVo
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,21 +22,7 @@ class PapelController {
                 @RequestParam("dataIni") dataIni:Optional<Date>,
                 @RequestParam("dataAte") dataAte:Optional<Date>):List<PapelVo>{
 
-        val filtro = Filtro();
-        if(dataIni.isPresent){
-            filtro.dataIni = dataIni.get()
-        }
-
-        if(dataAte.isPresent){
-            filtro.dataAte = dataAte.get()
-        }
-
-        if(page.isPresent){
-            filtro.page= page.get()
-        }
-
-
-        return service.findAll(filtro);
+        return service.findAll(page,dataIni,dataAte);
     }
 
 

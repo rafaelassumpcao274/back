@@ -3,11 +3,13 @@ package com.unilith.Back.V1.Mapper.Custom
 import com.unilith.Back.V1.Entity.V1.Endereco
 import com.unilith.Back.V1.Mapper.ICustom.CustomMapper
 import com.unilith.Back.V1.Vo.V1.EnderecoVo
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
 class EnderecoMapper:CustomMapper<EnderecoVo,Endereco> {
 
+    @Autowired
     lateinit var bairroMapper: BairroMapper
 
     override fun convertVo(entity: Endereco): EnderecoVo {

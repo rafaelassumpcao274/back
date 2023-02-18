@@ -11,6 +11,7 @@ import com.unilith.Back.V1.Util.AuditoriaUtil
 import com.unilith.Back.V1.Vo.V1.EnderecoVo
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.*
 import java.util.logging.Level
 import java.util.logging.Logger
 
@@ -32,8 +33,24 @@ class EnderecoService {
     private val logger = Logger.getLogger(EnderecoService::class.java.name)
 
 
-    fun findAll(filtro: Filtro): List<EnderecoVo> {
+    fun findAll(page: Optional<Int>,
+                dataIni: Optional<Date>,
+                dataAte: Optional<Date>
+    ): List<EnderecoVo> {
         logger.log(Level.INFO, "Find All Endereco")
+        val filtro = Filtro();
+        if(dataIni.isPresent){
+            filtro.dataIni = dataIni.get()
+        }
+
+        if(dataAte.isPresent){
+            filtro.dataAte = dataAte.get()
+        }
+
+        if(page.isPresent){
+            filtro.page= page.get()
+        }
+
         val lista:List<Endereco> = repository.findAll()
 
         return enderecoMapper.convertListVo(lista);

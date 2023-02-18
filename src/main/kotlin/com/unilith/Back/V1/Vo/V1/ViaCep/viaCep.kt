@@ -12,7 +12,6 @@ data class ViaCep(
     var ibge: String = "",
     var gia: String = "",
     var ddd: String = "",
-    var siafi: String = ""
-
-
+    var siafi: String = "",
+    var erro:Boolean = false
 )
