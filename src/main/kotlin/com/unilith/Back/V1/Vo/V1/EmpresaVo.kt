@@ -3,14 +3,14 @@ package com.unilith.Back.V1.Vo.V1
 data class EmpresaVo(
 
 
-    val id:Long = 0,
-    val nomeEmpresa:String = "",
-    val razaoSocial:String = "",
-    val cnpj:Int,
-    val email:String?,
-    val enderecoVo: EnderecoVo,
-    val contato:String?,
-    val telefone:Int?,
+    var id:Long = 0,
+    var nomeEmpresa:String = "",
+    var razaoSocial:String = "",
+    var cnpj:Long = 0L,
+    var email:String? = "",
+    var endereco: EnderecoVo = EnderecoVo(),
+    var contato:String? = "",
+    var telefone:Int? = 0,
 
 
-): AuditoriaVo()
+    ): AuditoriaVo()

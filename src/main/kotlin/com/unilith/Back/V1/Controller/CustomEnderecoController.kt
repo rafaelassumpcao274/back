@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
+
+@RestController
+@RequestMapping("/customEndereco")
 class CustomEnderecoController {
-    @RestController
-    @RequestMapping("/customEndereco")
-    class EnderecoController {
+
+
         @Autowired
         private lateinit var service: EnderecoService;
 
@@ -40,5 +42,5 @@ class CustomEnderecoController {
             return service.update(enderecoVo);
         }
 
-    }
+
 }

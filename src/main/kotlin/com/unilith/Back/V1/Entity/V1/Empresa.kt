@@ -17,7 +17,7 @@ data class Empresa (
     var razaoSocial:String = "",
 
     @Column(name = "cnpj", nullable = false, length = 14)
-    var cnpj:Int = 0,
+    var cnpj:Long = 0,
 
     @Column(name = "email", nullable = true, length = 100)
     var email:String?= "",

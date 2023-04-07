@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface UfRepository:JpaRepository<Uf,Long?>
+interface UfRepository:JpaRepository<Uf,Long?> {
+     fun findOneByDescricaoLike(descricao: String): Uf
+}
