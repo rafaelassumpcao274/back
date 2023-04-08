@@ -20,4 +20,8 @@ data class OrdemServicoVias(
     @JoinColumn(name = "via", referencedColumnName = "id")
     var via: ViasCores = ViasCores(),
 
+
+    @Column(name = "ordem", nullable = false, length = 10)
+    var ordem: Int = 0,
+
     ):Auditoria()

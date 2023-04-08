@@ -4,6 +4,7 @@ CREATE TABLE `ordemservico_vias` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ordem_servico` int DEFAULT NULL,
   `vias` int DEFAULT NULL,
+  `ordem` int DEFAULT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   `userInc` varchar(100) DEFAULT NULL,
