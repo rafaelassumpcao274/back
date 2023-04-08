@@ -5,7 +5,7 @@ import jakarta.persistence.*
 
 @Entity
 @Table(name = "via_cores")
-data class ViasCores(
+data class ViaCores(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

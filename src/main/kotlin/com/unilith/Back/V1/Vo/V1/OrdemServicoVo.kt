@@ -14,6 +14,6 @@ data class OrdemServicoVo(
 
     var listaAcabamento:List<AcabamentoVo>? = ArrayList<AcabamentoVo>(),
     var listaTintas:List<TintaVo>? = ArrayList<TintaVo>(),
-    var listaVias:List<ViasCoresVo>? = ArrayList<ViasCoresVo>()
+    var listaVias:List<ViaCoresVo>? = ArrayList<ViaCoresVo>()
 
 ):AuditoriaVo();

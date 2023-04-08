@@ -18,7 +18,7 @@ data class OrdemServicoVias(
 
     @ManyToOne()
     @JoinColumn(name = "via", referencedColumnName = "id")
-    var via: ViasCores = ViasCores(),
+    var via: ViaCores = ViaCores(),
 
 
     @Column(name = "ordem", nullable = false, length = 10)
