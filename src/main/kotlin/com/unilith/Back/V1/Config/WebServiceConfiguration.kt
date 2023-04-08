@@ -1,4 +1,4 @@
-package com.unilith.Back.V1.config
+package com.unilith.Back.V1.Config
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Configuration

@@ -1,4 +1,4 @@
-package com.unilith.Back.V1.config
+package com.unilith.Back.V1.Config
 
 import io.swagger.v3.oas.models.OpenAPI
 import io.swagger.v3.oas.models.info.Info
