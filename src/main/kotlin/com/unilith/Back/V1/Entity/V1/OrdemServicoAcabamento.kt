@@ -4,20 +4,19 @@ import jakarta.persistence.*
 
 
 @Entity
-@Table(name = "ordemservico_vias")
-data class OrdemServico_Vias(
-
+@Table(name = "ordemservico_acabamento")
+data class OrdemServicoAcabamento(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0,
-
 
     @ManyToOne()
     @JoinColumn(name = "ordemServico", referencedColumnName = "id")
     var ordemServico:OrdemServico = OrdemServico(),
 
     @ManyToOne()
-    @JoinColumn(name = "via", referencedColumnName = "id")
-    var via: Vias_cores = Vias_cores(),
+    @JoinColumn(name = "acabamento", referencedColumnName = "id")
+    var acabamento: Acabamento = Acabamento(),
 
-):Auditoria()
+
+):Auditoria();

@@ -1,6 +1,6 @@
 package com.unilith.Back.V1.Vo.V1
 
-data class OrdemServico_AcabamentoVo(
+data class OrdemServicoAcabamentoVo(
 
     var id: Long = 0,
     var ordemServico: OrdemServicoVo = OrdemServicoVo(),

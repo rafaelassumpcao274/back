@@ -6,7 +6,7 @@ import jakarta.persistence.*
 
 @Entity
 @Table(name = "ordemservico_tinta")
-data class OrdemServico_Tinta(
+data class OrdemServicoTinta(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,7 +2,7 @@ package com.unilith.Back.V1.Vo.V1
 
 import com.unilith.Back.V1.Enums.FrenteVerso
 
-data class OrdemServico_TintaVo(
+data class OrdemServicoTintaVo(
 
 
     var id: Long = 0,
