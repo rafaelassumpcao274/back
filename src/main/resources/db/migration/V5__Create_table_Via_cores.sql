@@ -7,4 +7,5 @@ CREATE TABLE `via_cores` (
   `updatedAt` datetime NOT NULL,
   `userInc` varchar(100) DEFAULT NULL,
   `userUpdate` varchar(100) DEFAULT NULL,
-);
+  PRIMARY KEY (`id`)
+  );
