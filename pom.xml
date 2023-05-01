@@ -17,7 +17,7 @@
 		<java.version>17</java.version>
 		<kotlin.version>1.6.21</kotlin.version>
 		<dozer.version>6.4.1</dozer.version>
-		<springdoc.version>2.0.0-RC1</springdoc.version>
+		<springdoc.version>2.0.2</springdoc.version>
 		<hibernate.validator.version>8.0.0.Final</hibernate.validator.version>
 		<gson.version>2.10.1</gson.version>
 	</properties>
