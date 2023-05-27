@@ -21,9 +21,8 @@
 
 		<hibernate.validator.version>8.0.0.Final</hibernate.validator.version>
 		<gson.version>2.10.1</gson.version>
-
-		<java-jwt.version>3.18.3</java-jwt.version>
-
+		<jakartapersistence.version>3.0.0</jakartapersistence.version>
+		<java-jwt.version>4.4.0</java-jwt.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -85,12 +84,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>${springdoc.version}</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate.validator.version}</version>
@@ -115,7 +108,7 @@
         <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
-            <version>3.0.0</version>
+            <version>${jakartapersistence.version}</version>
         </dependency>
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
@@ -175,15 +168,16 @@
 				</dependencies>
 			</plugin>
 
-			<plugin>
-				<groupId>org.flywaydb</groupId>
-				<artifactId>flyway-maven-plugin</artifactId>
-				<configuration>
-					<url>jdbc:mysql://localhost:3306/grafica_kotlin?useTimezone=true&amp;serverTimezone=UTC&amp;useSSL=false</url>
-					<user>root</user>
-					<password>*Rgh252817</password>
-				</configuration>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.flywaydb</groupId>-->
+<!--				<artifactId>flyway-maven-plugin</artifactId>-->
+<!--				<configuration>-->
+<!--					&lt;!&ndash;suppress UnresolvedMavenProperty &ndash;&gt;-->
+<!--					<url>jdbc:mysql://${MYSQL_HOST:localhost}:3306/grafica_kotlin?useTimezone=true&amp;serverTimezone=UTC&amp;useSSL=false</url>-->
+<!--					<user>root</user>-->
+<!--					<password>*Rgh252817</password>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 	<repositories>
