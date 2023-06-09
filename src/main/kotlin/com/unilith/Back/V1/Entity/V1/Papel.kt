@@ -3,7 +3,7 @@ package com.unilith.Back.V1.Entity.V1
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "Papel")
+@Table(name = "papel")
 data class Papel (
 
     @Id

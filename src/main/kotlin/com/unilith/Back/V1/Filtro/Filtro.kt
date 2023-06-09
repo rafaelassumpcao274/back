@@ -11,6 +11,8 @@ data class Filtro (
     var dataAteStr: String? = "",
     var dataIniStr: String? = "",
 
+    var descricao:String = "",
+
     var limit:Int = 10,
     var page:Int = 0
 

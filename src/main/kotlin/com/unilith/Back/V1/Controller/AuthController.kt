@@ -18,7 +18,8 @@ class AuthController {
     @Autowired
     lateinit var authService: AuthService
 
-//    @Operation(summary = "Authenticates an user and return a token")
+
+    @Operation(summary = "Authenticates an user and return a token")
     @PostMapping(value = ["/signin"])
     fun signin(@RequestBody data: AccountCredentialsVO?) : ResponseEntity<*> {
         return if (data!!.username.isNullOrBlank() || data.password.isNullOrBlank())
@@ -27,7 +28,7 @@ class AuthController {
         else authService.signin(data!!)
     }
 
-
+    @Operation(summary = "Authenticates an user and return a token")
     @PutMapping(value = ["/refresh/{username}"])
     fun refreshToken(@PathVariable("username") username: String?,
                      @RequestHeader("Authorization") refreshToken: String?) : ResponseEntity<*> {

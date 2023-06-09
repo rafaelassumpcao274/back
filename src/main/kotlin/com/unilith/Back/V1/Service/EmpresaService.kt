@@ -54,6 +54,7 @@ class EmpresaService {
 
 
     fun findAll(page: Optional<Int>,
+                descricao: Optional<String>,
                 dataIni: Optional<Date>,
                 dataAte: Optional<Date>,
                 totalItens: Optional<Int>
@@ -67,6 +68,9 @@ class EmpresaService {
             filtro.dataIni = dataIni.get()
         }
 
+        if(descricao.isPresent){
+            filtro.descricao = descricao.get();
+        }
         if(dataAte.isPresent){
             filtro.dataAte = dataAte.get()
         }
@@ -80,7 +84,15 @@ class EmpresaService {
         return  paginationMapper.convertVo(empresaMapper,pagination) ;
 
     }
+    fun findByNomeEmpresa(nomeEmpresa:String): List<EmpresaVo> {
+        logger.log(Level.INFO, "Find by Emṕresa name ${nomeEmpresa}");
 
+        val empresas: List<Empresa> = repository.findAllByNomeEmpresaContaining(nomeEmpresa,PageRequest.of(0,10));
+
+        return empresaMapper.convertListVo(empresas);
+
+
+    }
 
     fun findById(id: Long): EmpresaVo {
         logger.log(Level.INFO, "Find One Endereco");

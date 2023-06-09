@@ -1,7 +1,6 @@
 package com.unilith.Back.V1.Security.Jwt
 
 
-
 import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
@@ -117,4 +116,3 @@ class JwtTokenProvider {
         }
     }
 }
-
