@@ -4,22 +4,21 @@ import jakarta.persistence.*
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
-
 @Entity
-@Table(name="users")
-class User :UserDetails{
+@Table(name = "users")
+class User : UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
 
-    @Column(name = "user_name",  length = 255, unique = true)
+    @Column(name = "user_name", unique = true)
     var userName: String? = null
 
-    @Column(name = "full_name",  length = 255)
+    @Column(name = "full_name")
     var fullName: String? = null
 
-    @Column(name = "password",  length = 255)
+    @Column(name = "password")
     private var password: String? = null
 
     @Column(name = "account_non_expired")
@@ -37,21 +36,22 @@ class User :UserDetails{
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "user_permission",
-        joinColumns = [JoinColumn(name ="id_user")],
-        inverseJoinColumns = [JoinColumn(name ="id_permission")]
+        joinColumns = [JoinColumn(name = "id_user")],
+        inverseJoinColumns = [JoinColumn(name = "id_permission")]
     )
     var permissions: List<Permission>? = null
 
     val roles: List<String?>
         get(){
-            val roles:MutableList<String?> = ArrayList()
-            for (permission in permissions!!){
+            val roles: MutableList<String?> = ArrayList()
+            for (permission in permissions!!) {
                 roles.add(permission.description)
             }
-            return roles;
+            return roles
         }
-    override fun getAuthorities(): Collection<out GrantedAuthority> {
-       return permissions!!
+
+    override fun getAuthorities(): Collection<GrantedAuthority> {
+        return permissions!!
     }
 
     override fun getPassword(): String {
@@ -63,7 +63,7 @@ class User :UserDetails{
     }
 
     override fun isAccountNonExpired(): Boolean {
-       return accountNonExpired!!;
+        return accountNonExpired!!
     }
 
     override fun isAccountNonLocked(): Boolean {
@@ -77,6 +77,4 @@ class User :UserDetails{
     override fun isEnabled(): Boolean {
         return enabled!!
     }
-
-
 }

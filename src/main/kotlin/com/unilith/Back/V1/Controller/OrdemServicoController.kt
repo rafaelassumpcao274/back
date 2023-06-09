@@ -2,11 +2,12 @@ package com.unilith.Back.V1.Controller
 
 import com.unilith.Back.V1.Service.OrdemServicoService
 import com.unilith.Back.V1.Vo.V1.OrdemServicoVo
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
-
+@Tag(name = "Ordem de Servico Endpoint")
 @RestController
 @RequestMapping("/ordemservico")
 class OrdemServicoController {

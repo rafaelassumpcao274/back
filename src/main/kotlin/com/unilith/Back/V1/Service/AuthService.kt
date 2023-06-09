@@ -1,9 +1,9 @@
 package com.unilith.Back.V1.Service
 
 import com.unilith.Back.V1.Repository.UserRepository
-import com.unilith.Back.V1.Vo.V1.Security.AccountCredentialsVo
-import com.unilith.Back.V1.Vo.V1.Security.TokenVo
-import com.unilith.Back.V1.security.JwtTokenProvider
+import com.unilith.Back.V1.Security.Jwt.JwtTokenProvider
+import com.unilith.Back.V1.Vo.V1.Security.AccountCredentialsVO
+import com.unilith.Back.V1.Vo.V1.Security.TokenVO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
@@ -12,13 +12,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
-import java.util.logging.Level
 import java.util.logging.Logger
 
 @Service
 class AuthService {
 
-
+    @Autowired
     private lateinit var authenticationManager: AuthenticationManager
 
     @Autowired
@@ -29,23 +28,33 @@ class AuthService {
 
     private val logger = Logger.getLogger(AuthService::class.java.name)
 
-    fun signIn(data:AccountCredentialsVo): ResponseEntity<*>{
-        logger.log(Level.INFO, "Trying log user ${data.userName}");
+    fun signin(data: AccountCredentialsVO) : ResponseEntity<*> {
+        logger.info("Trying log user ${data.username}")
         return try {
-            val username = data.userName
+            val username = data.username
             val password = data.password
-            authenticationManager.authenticate(UsernamePasswordAuthenticationToken(username,password))
+            authenticationManager.authenticate(UsernamePasswordAuthenticationToken(username, password))
             val user = repository.findByUsername(username)
-            val tokenResponse: TokenVo = if( user != null){
-                tokenProvider.createAccessToken(username!!,user.roles)
-            }else{
-                throw UsernameNotFoundException("UserName $username not found !")
+            val tokenResponse: TokenVO = if (user != null) {
+                tokenProvider.createAccessToken(username!!, user.roles)
+            } else {
+                throw UsernameNotFoundException("Username $username not found!")
             }
-            ResponseEntity.ok(tokenResponse);
-        }catch (e:AuthenticationException){
-            throw BadCredentialsException("Invalid username or Password supplied!");
+            ResponseEntity.ok(tokenResponse)
+        } catch (e: AuthenticationException) {
+            throw BadCredentialsException("Invalid username or password supplied!")
         }
     }
 
+    fun refreshToken(username: String, refreshToken: String) : ResponseEntity<*> {
+        logger.info("Trying get refresh token to user $username")
 
+        val user = repository.findByUsername(username)
+        val tokenResponse: TokenVO = if (user != null) {
+            tokenProvider.refreshToken(refreshToken)
+        } else {
+            throw UsernameNotFoundException("Username $username not found!")
+        }
+        return ResponseEntity.ok(tokenResponse)
+    }
 }

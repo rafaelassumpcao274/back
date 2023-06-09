@@ -2,10 +2,11 @@ package com.unilith.Back.V1.Controller
 
 import com.unilith.Back.V1.Service.CidadeService
 import com.unilith.Back.V1.Vo.V1.CidadeVo
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.util.*
-
+@Tag(name = "Cidade Endpoint")
 @RestController
 @RequestMapping("/cidade")
 class CidadeController {

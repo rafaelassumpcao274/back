@@ -1,8 +1,8 @@
-package br.com.erudio.config
+package com.unilith.Back.V1.Config
 
 
-import com.unilith.Back.V1.security.JwtConfigurer
-import com.unilith.Back.V1.security.JwtTokenProvider
+import com.unilith.Back.V1.Security.Jwt.JwtConfigurer
+import com.unilith.Back.V1.Security.Jwt.JwtTokenProvider
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -46,8 +46,8 @@ class SecurityConfig {
             .httpBasic().disable()
             .csrf {o: CsrfConfigurer<HttpSecurity> -> o.disable()}
             .sessionManagement { session:
-                SessionManagementConfigurer<HttpSecurity?> ->
-                    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                                 SessionManagementConfigurer<HttpSecurity?> ->
+                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
             .authorizeHttpRequests {
                 authorizeHttpRequests -> authorizeHttpRequests

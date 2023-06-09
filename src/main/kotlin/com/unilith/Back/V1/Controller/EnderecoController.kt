@@ -2,10 +2,11 @@ package com.unilith.Back.V1.Controller
 
 import com.unilith.Back.V1.Service.EnderecoService
 import com.unilith.Back.V1.Vo.V1.EnderecoVo
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.util.*
-
+@Tag(name = "Endereco Endpoint")
 @RestController
 @RequestMapping("/endereco")
 class EnderecoController {
