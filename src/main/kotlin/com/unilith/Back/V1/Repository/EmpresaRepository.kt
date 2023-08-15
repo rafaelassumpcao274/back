@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface EmpresaRepository: JpaRepository<Empresa,Long?>{
     fun findAllByNomeEmpresaContaining(nomeEmpresa:String, pageable: Pageable): List<Empresa>
-
+    fun countByCnpj(cnpj:Long): Long
 }

@@ -3,7 +3,7 @@ services:
   db:
     image: mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - erudio-network
     restart: always
@@ -29,19 +29,26 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/grafica_kotlin
     volumes:
       - .m2:/root/.m2
-
-  phpmyadmin:
+  front:
+    image: rafaelassumpcao274/unilithfront:latest
+    ports:
+      - "80:80"
     depends_on:
-      - db
-    image: phpmyadmin/phpmyadmin
-    restart: always
+      - back
     networks:
       - erudio-network
-    ports:
-      - 88:80
-    environment:
-      PMA_HOST: db:3306
-      MYSQL_ROOT_PASSWORD: '*Rgh252817'
+#  phpmyadmin:
+#    depends_on:
+#      - db
+#    image: phpmyadmin/phpmyadmin
+#    restart: always
+#    networks:
+#      - erudio-network
+#    ports:
+#      - 88:80
+#    environment:
+#      PMA_HOST: db:3306
+#      MYSQL_ROOT_PASSWORD: '*Rgh252817'
 
 networks:
   erudio-network:

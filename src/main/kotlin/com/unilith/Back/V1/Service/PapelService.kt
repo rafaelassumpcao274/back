@@ -1,13 +1,16 @@
 package com.unilith.Back.V1.Service
 
+import com.unilith.Back.V1.Entity.V1.Formato
 import com.unilith.Back.V1.Entity.V1.Papel
 import com.unilith.Back.V1.Exceptions.RequestObjectisNullException
 import com.unilith.Back.V1.Exceptions.ResourceNotFoundException
 import com.unilith.Back.V1.Filtro.Filtro
 import com.unilith.Back.V1.Mapper.Custom.PapelMapper
 import com.unilith.Back.V1.Repository.PapelRepository
+import com.unilith.Back.V1.Vo.V1.FormatoVo
 import com.unilith.Back.V1.Vo.V1.PapelVo
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import java.util.*
 import java.util.logging.Level
@@ -53,6 +56,15 @@ class PapelService {
         val papel: Papel = repository.findById(id).orElseThrow({ ResourceNotFoundException("Objeto não Encontrado") });
 
         return mapper.convertVo(papel);
+
+
+    }
+    fun findByDescricao(descricao:String): List<PapelVo> {
+        logger.log(Level.INFO, "Find by Emṕresa name ${descricao}");
+
+        val listaPapeis: List<Papel> = repository.findAllByDescricaoContaining(descricao, PageRequest.of(0,10));
+
+        return mapper.convertListVo(listaPapeis);
 
 
     }

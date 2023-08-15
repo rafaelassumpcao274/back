@@ -1,6 +1,7 @@
 package com.unilith.Back.V1.Service
 
 import com.unilith.Back.V1.Entity.V1.Empresa
+import com.unilith.Back.V1.Exceptions.RequestInvalidObjectException
 import com.unilith.Back.V1.Exceptions.RequestObjectNotFoundException
 import com.unilith.Back.V1.Exceptions.RequestObjectisNullException
 import com.unilith.Back.V1.Exceptions.ResourceNotFoundException
@@ -12,6 +13,8 @@ import com.unilith.Back.V1.Mapper.DozerMapper
 import com.unilith.Back.V1.Repository.EmpresaRepository
 import com.unilith.Back.V1.Repository.EnderecoRepository
 import com.unilith.Back.V1.Util.AuditoriaUtil
+import com.unilith.Back.V1.Util.DateUtils.DateFormat
+import com.unilith.Back.V1.Util.DateUtils.DateUtil
 import com.unilith.Back.V1.Vo.V1.EmpresaVo
 import com.unilith.Back.V1.Vo.V1.Paginator
 import org.springframework.beans.factory.annotation.Autowired
@@ -110,16 +113,32 @@ class EmpresaService {
         if (empresaVo == null) throw RequestObjectisNullException()
 
         var empresa: Empresa = mapper.parseObject(empresaVo, Empresa::class.java);
+        validarEmpresa(empresa)
 
         auditoriaUtil.save(empresa)
 
-
         empresa.endereco = customEnderecoService.buscarEndereco(empresa.endereco);
         auditoriaUtil.save(empresa.endereco);
+
+
         enderecoRepository.save(empresa.endereco);
         repository.save(empresa)
 
         return mapper.parseObject(empresa, EmpresaVo::class.java);
+    }
+
+    fun validarEmpresa(empresa:Empresa){
+
+        if(empresa.cnpj != null && empresa.cnpj > 0){
+            val cnpj = empresa.cnpj
+
+            var countCnpj = repository.countByCnpj(cnpj)
+            if(countCnpj > 0 ){
+                throw RequestInvalidObjectException("Cnpj já esta cadastrado no sistema !!!")
+            }
+        }
+
+
     }
 
     fun update(empresaVo: EmpresaVo?): EmpresaVo {

@@ -2,7 +2,12 @@ package com.unilith.Back.V1.Util
 
 import com.google.gson.Gson
 import com.unilith.Back.V1.Exceptions.RequestInvalidObjectException
+import com.unilith.Back.V1.Exceptions.RequestObjectNotFoundException
+import com.unilith.Back.V1.Mapper.ApiMapper.viaCepMapper
+import com.unilith.Back.V1.Mapper.Custom.EnderecoMapper
+import com.unilith.Back.V1.Vo.V1.EnderecoVo
 import com.unilith.Back.V1.Vo.V1.ViaCep.ViaCep
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.net.URI
 import java.net.http.HttpClient
@@ -10,7 +15,15 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 
 @Service
-class ViaCepApi {
+class ViaCepService {
+
+    @Autowired
+    lateinit var enderecoMapper: EnderecoMapper;
+
+    @Autowired
+    lateinit var viaCepUtils: ViaCepUtils;
+    @Autowired
+    lateinit var viaCepMapper: viaCepMapper;
 
     var urlViacep: String = "http://viacep.com.br/ws/?/json"
 
@@ -19,16 +32,26 @@ class ViaCepApi {
         return requisicao(cep)
     }
 
-    fun validacaoCep(cep: String){
 
-        if (cep.length > 8) {
-            throw RequestInvalidObjectException("Cep com tamanho invalido!!!")
+    fun buscarViaCep(cep:String): EnderecoVo {
+        validacaoCep(cep)
+
+        var viacep = this.findByCep(cep);
+        if(viacep.erro){
+            throw RequestObjectNotFoundException();
         }
+        return enderecoMapper.convertVo(viaCepMapper.convertEntity(viacep));
 
+    }
+    fun validacaoCep(cep: String){
 
         var re = Regex("[0-9]+")
         if (!cep.matches(re)) {
-            throw RequestInvalidObjectException("Cep deve conter somente numeros");
+            viaCepUtils.removeCaracterInString(cep)
+        }
+
+        if (cep.length > 9 || cep.length < 8) {
+            throw RequestInvalidObjectException("Cep com tamanho invalido!!!")
         }
 
     }

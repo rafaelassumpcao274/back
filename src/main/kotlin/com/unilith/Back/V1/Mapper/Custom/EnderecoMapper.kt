@@ -18,6 +18,8 @@ class EnderecoMapper:CustomMapper<EnderecoVo,Endereco> {
         vo.id = entity.id
         vo.descricao = entity.descricao
         vo.cep = entity.cep
+        vo.numero= entity.numero
+        vo.complemento = entity.complemento
         vo.bairro = bairroMapper.convertVo(entity.bairro)
 
         return vo
@@ -29,6 +31,8 @@ class EnderecoMapper:CustomMapper<EnderecoVo,Endereco> {
         entity.id = vo.id
         entity.descricao = vo.descricao
         entity.cep = vo.cep
+        entity.numero= vo.numero
+        entity.complemento = vo.complemento
         entity.bairro = bairroMapper.convertEntity(vo.bairro)
 
         return entity

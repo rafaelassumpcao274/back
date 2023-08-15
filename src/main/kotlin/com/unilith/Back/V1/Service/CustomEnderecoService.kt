@@ -8,16 +8,17 @@ import com.unilith.Back.V1.Repository.BairroRepository
 import com.unilith.Back.V1.Repository.CidadeRepository
 import com.unilith.Back.V1.Repository.EnderecoRepository
 import com.unilith.Back.V1.Repository.UfRepository
-import com.unilith.Back.V1.Util.ViaCepApi
+import com.unilith.Back.V1.Util.ViaCepService
 import com.unilith.Back.V1.Vo.V1.EnderecoVo
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.stereotype.Service
 
 @Service
 class CustomEnderecoService {
 
     @Autowired
-    lateinit var viaCepApi:ViaCepApi
+    lateinit var viaCepApi:ViaCepService;
     @Autowired
     lateinit var enderecoMapper: EnderecoMapper;
     @Autowired
@@ -30,41 +31,55 @@ class CustomEnderecoService {
     lateinit var ufRepository: UfRepository;
 
 
-    @Autowired
-    lateinit var viaCepMapper: viaCepMapper;
 
-    fun buscarViaCep(cep:String):EnderecoVo{
+    fun     buscarEndereco(endereco:Endereco):Endereco{
+        try{
 
-        var viacep = viaCepApi.findByCep(cep);
-        if(viacep.erro){
-            throw RequestObjectNotFoundException();
+            if(endereco.bairro.cidade.uf != null && !endereco.bairro.cidade.uf.descricao.isNullOrEmpty() ){
+                endereco.bairro.cidade.uf = ufRepository.findOneByDescricaoLike(endereco.bairro.cidade.uf.descricao)
+            }
+
+            if(endereco.bairro.cidade != null && !endereco.bairro.cidade.descricao.isNullOrEmpty() ){
+                endereco.bairro.cidade = cidadeRepository.findOneByDescricaoEquals(endereco.bairro.cidade.descricao)
+            }
+
+            if(endereco.bairro != null && !endereco.bairro.descricao.isNullOrEmpty()){
+                endereco.bairro = bairroRepository.findOneByDescricaoEquals(endereco.bairro.descricao);
+            }
+
+
+        }catch (e: EmptyResultDataAccessException){
+            if(endereco.cep == null || endereco.cep == 0){
+                throw NullPointerException("Endereco Não encontrado !!!")
+            }
+            var enderecoViaCep = enderecoMapper.convertEntity(viaCepApi.buscarViaCep(endereco.cep.toString()))
+
+            enderecoViaCep.numero = endereco.numero
+            enderecoViaCep.complemento = endereco.complemento
+
+            if(endereco.bairro.cidade.uf.id == null || endereco.bairro.cidade.uf.id.equals(0L)){
+
+                endereco.bairro.cidade.uf = ufRepository.save(enderecoViaCep.bairro.cidade.uf)
+
+            }
+            enderecoViaCep.bairro.cidade.uf = endereco.bairro.cidade.uf
+            if(endereco.bairro.cidade.id == null || endereco.bairro.cidade.id.equals(0L)){
+                cidadeRepository.save(enderecoViaCep.bairro.cidade)
+                endereco.bairro.cidade = enderecoViaCep.bairro.cidade
+            }
+            enderecoViaCep.bairro.cidade =  endereco.bairro.cidade
+            if(endereco.bairro.id == null || endereco.bairro.id.equals(0L)){
+                bairroRepository.save(enderecoViaCep.bairro)
+                endereco.bairro = enderecoViaCep.bairro
+            }
+            enderecoViaCep.bairro =   endereco.bairro
+
+            return enderecoViaCep
+
         }
-        return enderecoMapper.convertVo(viaCepMapper.convertEntity(viacep));
-
-    }
 
 
-    fun buscarEndereco(endereco:Endereco):Endereco{
-        var novoEndereco: Endereco = endereco;
-
-        if(endereco.descricao.isNullOrEmpty() && endereco.cep != null){
-            novoEndereco = enderecoMapper.convertEntity(buscarViaCep(endereco.cep.toString()));
-        }
-
-        if(novoEndereco.bairro != null && !novoEndereco.bairro.descricao.isNullOrEmpty()){
-            novoEndereco.bairro = bairroRepository.findOneByDescricaoEquals(endereco.bairro.descricao);
-        }
-
-        if(novoEndereco.bairro.cidade != null && !novoEndereco.bairro.cidade.descricao.isNullOrEmpty() ){
-            novoEndereco.bairro.cidade = cidadeRepository.findOneByDescricaoEquals(endereco.bairro.cidade.descricao)
-        }
-
-        if(novoEndereco.bairro.cidade.uf != null && !novoEndereco.bairro.cidade.uf.descricao.isNullOrEmpty() ){
-            novoEndereco.bairro.cidade.uf = ufRepository.findOneByDescricaoLike(endereco.bairro.cidade.uf.descricao)
-        }
-
-
-        return novoEndereco;
+        return endereco;
     }
 
 

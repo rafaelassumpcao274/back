@@ -17,13 +17,13 @@ class CustomEnderecoController {
         @Autowired
         private lateinit var service: EnderecoService;
 
-        @Autowired
-        private lateinit var customEnderecoService: CustomEnderecoService
-
-        @GetMapping(value = ["/{cep}"])
-        fun findById(@PathVariable cep:String): EnderecoVo {
-            return customEnderecoService.buscarViaCep(cep);
-        }
+//        @Autowired
+//        private lateinit var customEnderecoService: CustomEnderecoService
+//
+//        @GetMapping(value = ["/{cep}"])
+//        fun findById(@PathVariable cep:String): EnderecoVo {
+//            return customEnderecoService.buscarViaCep(cep);
+//        }
 
         @GetMapping(value = ["/"])
         fun findAll(@RequestParam("page") page: Optional<Int>,

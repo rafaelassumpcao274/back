@@ -16,6 +16,12 @@ data class Endereco(
     @Column(name = "cep", nullable = false, length = 50)
     var cep: Int =0,
 
+    @Column(name = "numero", nullable = false, length = 50)
+    var numero: Int =0,
+
+    @Column(name = "complemento", nullable = false, length = 50)
+    var complemento: String = "",
+
     @ManyToOne()
     @JoinColumn(name = "bairro_id", referencedColumnName = "id")
     var bairro:Bairro= Bairro(),

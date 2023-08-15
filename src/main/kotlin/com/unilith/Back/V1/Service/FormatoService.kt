@@ -1,13 +1,16 @@
 package com.unilith.Back.V1.Service
 
+import com.unilith.Back.V1.Entity.V1.Empresa
 import com.unilith.Back.V1.Entity.V1.Formato
 import com.unilith.Back.V1.Exceptions.RequestObjectisNullException
 import com.unilith.Back.V1.Exceptions.ResourceNotFoundException
 import com.unilith.Back.V1.Filtro.Filtro
 import com.unilith.Back.V1.Mapper.Custom.FormatoMapper
 import com.unilith.Back.V1.Repository.FormatoRepository
+import com.unilith.Back.V1.Vo.V1.EmpresaVo
 import com.unilith.Back.V1.Vo.V1.FormatoVo
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import java.util.logging.Level
 import java.util.logging.Logger
@@ -28,6 +31,15 @@ class FormatoService {
         logger.log(Level.INFO, "Find All Formato")
         val lista = repository.findAll()
         return mapper.convertListVo(lista as ArrayList<Formato>);
+
+    }
+    fun findByDescricao(descricao:String): List<FormatoVo> {
+        logger.log(Level.INFO, "Find by Emṕresa name ${descricao}");
+
+        val formato: List<Formato> = repository.findAllByDescricaoContaining(descricao, PageRequest.of(0,10));
+
+        return mapper.convertListVo(formato);
+
 
     }
 

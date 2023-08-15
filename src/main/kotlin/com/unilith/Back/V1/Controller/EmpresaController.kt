@@ -24,11 +24,12 @@ class EmpresaController {
 
     @GetMapping(value = [""])
     fun findAll(@RequestParam("page") page: Optional<Int>,
+                @RequestParam("descricao") descricao: Optional<String>,
                 @RequestParam("dataIni") dataIni: Optional<Date>,
                 @RequestParam("dataAte") dataAte: Optional<Date>,
                 @RequestParam("totalItens") totalItens: Optional<Int>
     ): Paginator<EmpresaVo> {
-        return service.findAll(page,dataIni,dataAte,totalItens);
+        return service.findAll(page,descricao,dataIni,dataAte,totalItens);
     }
 
     @PostMapping(value = [""])

@@ -107,8 +107,8 @@ class JwtTokenProvider {
     }
 
     fun validateToken(token: String): Boolean {
-        val decodedJWT = decodedToken(token)
         try {
+            val decodedJWT = decodedToken(token)
             if(decodedJWT.expiresAt.before(Date())) false
             return true
         } catch (e: Exception) {

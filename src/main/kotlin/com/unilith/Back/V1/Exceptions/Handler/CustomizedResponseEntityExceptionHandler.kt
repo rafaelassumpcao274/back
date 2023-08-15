@@ -1,9 +1,7 @@
-package br.com.erudio.exceptions.handler
+package com.unilith.Back.V1.exceptions.handler
 
-import com.unilith.Back.V1.Exceptions.ExceptionResponse
-import com.unilith.Back.V1.Exceptions.InvalidJwtAuthException
-import com.unilith.Back.V1.Exceptions.RequestObjectisNullException
-import com.unilith.Back.V1.Exceptions.ResourceNotFoundException
+
+import com.unilith.Back.V1.Exceptions.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
@@ -50,7 +48,18 @@ class CustomizedResponseEntityExceptionHandler : ResponseEntityExceptionHandler(
         return ResponseEntity<ExceptionResponse>(exceptioResponse, HttpStatus.BAD_REQUEST)
     }
 
-    @ExceptionHandler(InvalidJwtAuthException::class)
+    @ExceptionHandler(RequestInvalidObjectException::class)
+    fun handleInvalidObjectExceptions(ex: Exception, request: WebRequest) :
+            ResponseEntity<ExceptionResponse> {
+        val exceptioResponse = ExceptionResponse(
+            Date(),
+            ex.message,
+            request.getDescription(false)
+        )
+        return ResponseEntity<ExceptionResponse>(exceptioResponse, HttpStatus.BAD_REQUEST)
+    }
+
+    @ExceptionHandler(InvalidJwtAuthenticationException::class)
     fun handleInvalidJwtAuthenticationExceptions(ex: Exception, request: WebRequest) :
             ResponseEntity<ExceptionResponse> {
         val exceptioResponse = ExceptionResponse(

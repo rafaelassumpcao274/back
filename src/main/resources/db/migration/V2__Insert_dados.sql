@@ -26,7 +26,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `enderecos` WRITE;
 
-INSERT INTO `enderecos` VALUES (1,'Estrada velha',81450020,1,'2022-09-06 00:32:28','2022-09-06 00:32:28','Rafael','Rafael');
+INSERT INTO `enderecos` VALUES (1,'Estrada velha',81450020,"Bl A Apt 31",2100,1,'2022-09-06 00:32:28','2022-09-06 00:32:28','Rafael','Rafael');
 
 UNLOCK TABLES;
 
