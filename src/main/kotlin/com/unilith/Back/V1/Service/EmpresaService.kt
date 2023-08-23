@@ -88,7 +88,7 @@ class EmpresaService {
 
     }
     fun findByNomeEmpresa(nomeEmpresa:String): List<EmpresaVo> {
-        logger.log(Level.INFO, "Find by Emṕresa name ${nomeEmpresa}");
+        logger.log(Level.INFO, "Find by Empresa name ${nomeEmpresa}");
 
         val empresas: List<Empresa> = repository.findAllByNomeEmpresaContaining(nomeEmpresa,PageRequest.of(0,10));
 

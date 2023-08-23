@@ -94,7 +94,7 @@ class OrdemServicoService {
         if (ordemServicoVo == null) throw RequestObjectisNullException()
 
         val ordemServico: OrdemServico = mapper.parseObject(ordemServicoVo,OrdemServico::class.java);
-
+        auditoriaUtil.save(ordemServico)
         var ordemServicoNova =    mapper.parseObject(repository.save(ordemServico),OrdemServicoVo::class.java)
 
         if(ordemServicoVo.listaAcabamento != null){

@@ -9,7 +9,7 @@ data class OrdemServicoVo(
     var numeracaoFinal: Int =0,
     var observacao: String ="",
     var formato: FormatoVo = FormatoVo(),
-    var cliente: EmpresaVo = EmpresaVo(),
+    var empresa: EmpresaVo = EmpresaVo(),
     var papel: PapelVo = PapelVo(),
 
     var listaAcabamento:List<AcabamentoVo>? = ArrayList<AcabamentoVo>(),

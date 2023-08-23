@@ -1,6 +1,7 @@
 package com.unilith.Back.V1.Entity.V1
 
 import jakarta.persistence.*
+import kotlin.jvm.Transient
 
 
 @Entity
@@ -35,14 +36,17 @@ data class OrdemServico (
 //    var cor_verso:Tinta= Tinta(),
 
     @ManyToOne()
+    @Transient
     @JoinColumn(name = "formato", referencedColumnName = "id")
     var formato:Formato= Formato(),
 
     @ManyToOne()
+    @Transient
     @JoinColumn(name = "cliente", referencedColumnName = "id")
-    var cliente:Empresa= Empresa(),
+    var empresa:Empresa= Empresa(),
 
     @ManyToOne()
+    @Transient
     @JoinColumn(name = "papel", referencedColumnName = "id")
     var papel:Papel= Papel(),
 
