@@ -66,24 +66,24 @@ class OrdemServicoService {
 
         val ordemServico: OrdemServico = repository.findById(id).orElseThrow({ ResourceNotFoundException("Objeto não Encontrado") });
 
-        var listaOrdemServicoAcabamento = ordemServicoAcabamentoService.repository.findAllByOrdemServico(ordemServico);
+//        var listaOrdemServicoAcabamento = ordemServicoAcabamentoService.repository.findAllByOrdemServico(ordemServico);
         var listaOrdemServicoTinta = ordemServicoTintaService.repository.findAllByOrdemServico(ordemServico);
-        var listaOrdemServicoVias = ordemServicoViaCoresService.repository.findAllByOrdemServico(ordemServico);
+//        var listaOrdemServicoVias = ordemServicoViaCoresService.repository.findAllByOrdemServico(ordemServico);
 
         var ordemServicoVo =  mapper.parseObject(ordemServico,OrdemServicoVo::class.java);
 
 
-        ordemServicoVo.listaAcabamento = listaOrdemServicoAcabamento
-            .map { OrdemServicoAcabamento::acabamento }
-            .map{osAcabamento -> mapper.parseObject(osAcabamento,AcabamentoVo::class.java)};
+//        ordemServicoVo.listaAcabamento = listaOrdemServicoAcabamento
+//            .map { OrdemServicoAcabamento::acabamento }
+//            .map{osAcabamento -> mapper.parseObject(osAcabamento,AcabamentoVo::class.java)};
 
         ordemServicoVo.listaTintas = listaOrdemServicoTinta
             .map { OrdemServicoTinta::tinta }
             .map{osTinta -> mapper.parseObject(osTinta,TintaVo::class.java)};
 
-        ordemServicoVo.listaVias = listaOrdemServicoVias
-            .map { OrdemServicoViaCores::via }
-            .map{osVia -> mapper.parseObject(osVia,ViaCoresVo::class.java)};
+//        ordemServicoVo.listaVias = listaOrdemServicoVias
+//            .map { OrdemServicoViaCores::via }
+//            .map{osVia -> mapper.parseObject(osVia,ViaCoresVo::class.java)};
 
         return ordemServicoVo;
 
@@ -97,13 +97,6 @@ class OrdemServicoService {
         auditoriaUtil.save(ordemServico)
         var ordemServicoNova =    mapper.parseObject(repository.save(ordemServico),OrdemServicoVo::class.java)
 
-        if(ordemServicoVo.listaAcabamento != null){
-            var listaAcamentos:List<AcabamentoVo> = ordemServicoVo.listaAcabamento!!
-            listaAcamentos
-                .map { acabamento -> OrdemServicoAcabamentoVo(0,ordemServicoNova,acabamento) }
-                .map { ordemServicoAcabamentoService::create }
-        }
-
 
         if(ordemServicoVo.listaTintas != null){
 
@@ -113,11 +106,11 @@ class OrdemServicoService {
 
         }
 
-        if(ordemServicoVo.listaVias != null){
-            ordemServicoVo.listaVias!!
-                .map { viaCores -> OrdemServicoViaCoresVo(0,ordemServicoNova,viaCores) }
-                .map { ordemServicoViaCoresService::create }
-        }
+//        if(ordemServicoVo.listaVias != null){
+//            ordemServicoVo.listaVias!!
+//                .map { viaCores -> OrdemServicoViaCoresVo(0,ordemServicoNova,viaCores) }
+//                .map { ordemServicoViaCoresService::create }
+//        }
 
         return mapper.parseObject(ordemServico,OrdemServicoVo::class.java);
     }

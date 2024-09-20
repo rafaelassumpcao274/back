@@ -17,7 +17,7 @@ class CidadeMapper : CustomMapper<CidadeVo, Cidade> {
 
         vo.id = entity.id
         vo.descricao = entity.descricao
-        vo.uf = ufMapper.convertVo(entity.uf)
+        vo.uf = entity.uf?.let { ufMapper.convertVo(it) }!!
 
 
         return vo

@@ -8,7 +8,7 @@ data class EmpresaVo(
     var razaoSocial:String = "",
     var cnpj:Long = 0L,
     var email:String? = "",
-    var endereco: EnderecoVo = EnderecoVo(),
+    var endereco: EnderecoVo? = EnderecoVo(),
     var contato:String? = "",
     var telefone:Int? = 0,
 

@@ -13,8 +13,6 @@ import com.unilith.Back.V1.Mapper.DozerMapper
 import com.unilith.Back.V1.Repository.EmpresaRepository
 import com.unilith.Back.V1.Repository.EnderecoRepository
 import com.unilith.Back.V1.Util.AuditoriaUtil
-import com.unilith.Back.V1.Util.DateUtils.DateFormat
-import com.unilith.Back.V1.Util.DateUtils.DateUtil
 import com.unilith.Back.V1.Vo.V1.EmpresaVo
 import com.unilith.Back.V1.Vo.V1.Paginator
 import org.springframework.beans.factory.annotation.Autowired
@@ -117,11 +115,11 @@ class EmpresaService {
 
         auditoriaUtil.save(empresa)
 
-        empresa.endereco = customEnderecoService.buscarEndereco(empresa.endereco);
-        auditoriaUtil.save(empresa.endereco);
+        empresa.endereco = empresa.endereco?.let { customEnderecoService.buscarEndereco(it) };
+        auditoriaUtil.save(empresa.endereco!!);
 
 
-        enderecoRepository.save(empresa.endereco);
+        enderecoRepository.save(empresa.endereco!!);
         repository.save(empresa)
 
         return mapper.parseObject(empresa, EmpresaVo::class.java);
@@ -151,7 +149,7 @@ class EmpresaService {
         empresa.cnpj = empresaVo.cnpj
         empresa.nomeEmpresa = empresaVo.nomeEmpresa;
         empresa.email = empresaVo.email;
-        empresa.endereco = enderecoMapper.convertEntity(empresaVo.endereco);
+        empresa.endereco = empresaVo.endereco?.let { enderecoMapper.convertEntity(it) }!!;
         empresa.razaoSocial = empresaVo.razaoSocial;
         empresa.contato = empresaVo.contato;
         empresa.telefone = empresaVo.telefone;

@@ -14,9 +14,18 @@ class viaCepMapper:CustomMapper<ViaCep,Endereco>{
         var viaCep:ViaCep = ViaCep();
         viaCep.logradouro = entity.descricao;
         viaCep.cep = entity.cep.toString();
-        viaCep.bairro = entity.bairro?.descricao;
-        viaCep.localidade = entity.bairro?.cidade?.descricao;
-        viaCep.uf = entity.bairro?.cidade?.uf?.descricao;
+
+        if(entity.bairro?.descricao != null){
+            viaCep.bairro = entity.bairro?.descricao!!;
+        }
+
+        if(entity.bairro?.cidade?.descricao != null){
+            viaCep.localidade = entity.bairro?.cidade?.descricao!!;
+        }
+
+        if(entity.bairro?.cidade?.uf?.descricao != null){
+            viaCep.uf = entity.bairro?.cidade?.uf?.descricao!!;
+        }
 
         return viaCep;
     }
@@ -34,8 +43,8 @@ class viaCepMapper:CustomMapper<ViaCep,Endereco>{
         endereco.descricao = vo.logradouro;
         endereco.cep = vo.cep.replace("-","").toInt();
         endereco.bairro = bairro;
-        endereco.bairro.cidade = cidade;
-        endereco.bairro.cidade.uf = uf;
+        endereco.bairro!!.cidade = cidade;
+        endereco.bairro!!.cidade?.uf = uf;
         return endereco;
     }
 

@@ -13,15 +13,14 @@ data class OrdemServicoViaCores(
 
 
     @ManyToOne()
-    @JoinColumn(name = "ordemServico", referencedColumnName = "id")
+    @JoinColumn(name = "ordem_servico", referencedColumnName = "id")
     var ordemServico:OrdemServico = OrdemServico(),
 
     @ManyToOne()
-    @JoinColumn(name = "via", referencedColumnName = "id")
+    @JoinColumn(name = "vias", referencedColumnName = "id")
     var via: ViaCores = ViaCores(),
 
 
-    @Column(name = "ordem", nullable = false, length = 10)
-    var ordem: Int = 0,
+
 
     ):Auditoria()

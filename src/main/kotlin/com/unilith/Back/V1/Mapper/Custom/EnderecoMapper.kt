@@ -20,7 +20,7 @@ class EnderecoMapper:CustomMapper<EnderecoVo,Endereco> {
         vo.cep = entity.cep
         vo.numero= entity.numero
         vo.complemento = entity.complemento
-        vo.bairro = bairroMapper.convertVo(entity.bairro)
+        vo.bairro = entity.bairro?.let { bairroMapper.convertVo(it) }
 
         return vo
     }
@@ -33,7 +33,7 @@ class EnderecoMapper:CustomMapper<EnderecoVo,Endereco> {
         entity.cep = vo.cep
         entity.numero= vo.numero
         entity.complemento = vo.complemento
-        entity.bairro = bairroMapper.convertEntity(vo.bairro)
+        entity.bairro = vo.bairro?.let { bairroMapper.convertEntity(it) }
 
         return entity
     }

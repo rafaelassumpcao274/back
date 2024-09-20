@@ -1,6 +1,7 @@
 package com.unilith.Back.V1.Util
 
 import com.unilith.Back.V1.Entity.V1.Auditoria
+import com.unilith.Back.V1.Entity.V1.Cidade
 import com.unilith.Back.V1.Vo.V1.AuditoriaVo
 import org.springframework.stereotype.Service
 import java.util.*
@@ -15,7 +16,7 @@ class AuditoriaUtil{
     }
 
 
-    fun <T : Auditoria> update(objeto:T){
+    fun<T: Auditoria> update(objeto: T){
 
         objeto.updatedAt = Date()
         objeto.userUpdate = "Rafael"

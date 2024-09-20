@@ -26,7 +26,7 @@ class EmpresaMapper: CustomMapper<EmpresaVo,Empresa> {
         empresaVo.contato = entity.contato;
         empresaVo.razaoSocial = entity.razaoSocial;
         empresaVo.telefone = entity.telefone;
-        empresaVo.endereco = enderecoMapper.convertVo(entity.endereco);
+        empresaVo.endereco = entity.endereco?.let { enderecoMapper.convertVo(it) };
         auditoriaUtil.convertVo(entity,empresaVo)
 
 
@@ -44,7 +44,7 @@ class EmpresaMapper: CustomMapper<EmpresaVo,Empresa> {
         empresa.contato = vo.contato;
         empresa.razaoSocial = vo.razaoSocial;
         empresa.telefone = vo.telefone;
-        empresa.endereco = enderecoMapper.convertEntity(vo.endereco);
+        empresa.endereco = vo.endereco?.let { enderecoMapper.convertEntity(it) };
 
 
         return empresa;

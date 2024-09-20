@@ -16,7 +16,7 @@ data class Cidade(
 
     @OneToOne(optional=false)
     @JoinColumn(name = "uf_id", referencedColumnName = "id")
-    var uf:Uf= Uf(),
+    var uf:Uf ? = Uf(),
 
 
 ):Auditoria()

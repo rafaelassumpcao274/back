@@ -9,7 +9,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/grafica_kotlin
-    username: rafael
+    username: root
     password: '*Rgh252817'
   jpa:
     hibernate:
@@ -17,9 +17,5 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     ddl-auto: none
     show-sql: false
-#spring-doc:
-#  paths-to-match:
-#    - /api/**
-#    - /auth/**
-#  swagger-ui:
-#    use-root-path: true
+viacep:
+  url: http://viacep.com.br/ws/?/json

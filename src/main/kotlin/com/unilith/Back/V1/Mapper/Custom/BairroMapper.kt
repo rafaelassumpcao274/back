@@ -17,7 +17,7 @@ class BairroMapper : CustomMapper<BairroVo, Bairro> {
 
         vo.id = entity.id
         vo.descricao = entity.descricao
-        vo.cidade = cidadeMapper.convertVo(entity.cidade)
+        vo.cidade = entity.cidade?.let { cidadeMapper.convertVo(it) }
 
 
         return vo;
@@ -28,7 +28,7 @@ class BairroMapper : CustomMapper<BairroVo, Bairro> {
 
         entity.id = vo.id
         entity.descricao = vo.descricao
-        entity.cidade = cidadeMapper.convertEntity(vo.cidade)
+        entity.cidade = vo.cidade?.let { cidadeMapper.convertEntity(it) }
 
 
         return entity;

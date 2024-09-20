@@ -15,8 +15,8 @@ data class Bairro(
     var descricao: String ="",
 
     @ManyToOne()
-    @JoinColumn(name = "cidade_id", referencedColumnName = "id")
-    var cidade:Cidade= Cidade(),
+    @JoinColumn(name = "cidade_id", referencedColumnName = "id",)
+    var cidade:Cidade? = Cidade(),
 
 
 ):Auditoria()

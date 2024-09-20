@@ -14,5 +14,7 @@ data class ViaCores(
     @Column(name = "descricao", nullable = false, length = 50)
     var descricao: String ="",
 
+    @Column(name = "ordem", nullable = false, length = 10)
+    var ordem: Int = 0,
 
     ):Auditoria()

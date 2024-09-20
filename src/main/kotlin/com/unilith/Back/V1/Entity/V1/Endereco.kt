@@ -24,7 +24,7 @@ data class Endereco(
 
     @ManyToOne()
     @JoinColumn(name = "bairro_id", referencedColumnName = "id")
-    var bairro:Bairro= Bairro(),
+    var bairro:Bairro ?= Bairro(),
 
 
 ):Auditoria()

@@ -11,7 +11,7 @@ data class OrdemServicoAcabamento(
     var id: Long = 0,
 
     @ManyToOne()
-    @JoinColumn(name = "ordemServico", referencedColumnName = "id")
+    @JoinColumn(name = "ordem_servico", referencedColumnName = "id")
     var ordemServico:OrdemServico = OrdemServico(),
 
     @ManyToOne()

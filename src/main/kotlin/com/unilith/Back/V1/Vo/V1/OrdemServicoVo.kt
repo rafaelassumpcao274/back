@@ -7,13 +7,15 @@ data class OrdemServicoVo(
     var quantidadeFolhas: Int =0,
     var numeracaoIni: Int =0,
     var numeracaoFinal: Int =0,
-    var observacao: String ="",
-    var formato: FormatoVo = FormatoVo(),
-    var empresa: EmpresaVo = EmpresaVo(),
-    var papel: PapelVo = PapelVo(),
+    var observacao: String? = "",
+    var formato: FormatoVo? = FormatoVo(),
+    var empresa: EmpresaVo? = EmpresaVo(),
+    var papel: PapelVo? = PapelVo(),
 
-    var listaAcabamento:List<AcabamentoVo>? = ArrayList<AcabamentoVo>(),
+    var listaAcabamentos:List<AcabamentoVo>? = ArrayList<AcabamentoVo>(),
     var listaTintas:List<TintaVo>? = ArrayList<TintaVo>(),
-    var listaVias:List<ViaCoresVo>? = ArrayList<ViaCoresVo>()
+
+
+    var listaViaCores:List<ViaCoresVo>? = ArrayList<ViaCoresVo>()
 
 ):AuditoriaVo();

@@ -13,15 +13,13 @@ data class OrdemServicoTinta(
     var id: Long = 0,
 
     @ManyToOne()
-    @JoinColumn(name = "ordemServico", referencedColumnName = "id")
+    @JoinColumn(name = "ordem_servico", referencedColumnName = "id")
     var ordemServico:OrdemServico = OrdemServico(),
 
     @ManyToOne()
     @JoinColumn(name = "tinta", referencedColumnName = "id")
     var tinta: Tinta = Tinta(),
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "freteVerso", nullable = false, length = 7)
-    var freteVerso: FrenteVerso = FrenteVerso.FRENTE
+
 
 ):Auditoria();

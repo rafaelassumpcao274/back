@@ -1,21 +1,22 @@
-package com.unilith.Back.V1.Util
+package com.unilith.Back.V1.Util.infra
 
 import com.google.gson.Gson
 import com.unilith.Back.V1.Exceptions.RequestInvalidObjectException
 import com.unilith.Back.V1.Exceptions.RequestObjectNotFoundException
 import com.unilith.Back.V1.Mapper.ApiMapper.viaCepMapper
 import com.unilith.Back.V1.Mapper.Custom.EnderecoMapper
+import com.unilith.Back.V1.Util.port.ApiCepPort
 import com.unilith.Back.V1.Vo.V1.EnderecoVo
 import com.unilith.Back.V1.Vo.V1.ViaCep.ViaCep
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 
-@Service
-class ViaCepService {
+class ViaCepAdapter: ApiCepPort {
 
     @Autowired
     lateinit var enderecoMapper: EnderecoMapper;
@@ -25,7 +26,9 @@ class ViaCepService {
     @Autowired
     lateinit var viaCepMapper: viaCepMapper;
 
-    var urlViacep: String = "http://viacep.com.br/ws/?/json"
+
+    @Value("\${viacep.url}")
+    lateinit var urlViacep: String;
 
     fun findByCep(cep: String): ViaCep {
         validacaoCep(cep);
@@ -33,7 +36,7 @@ class ViaCepService {
     }
 
 
-    fun buscarViaCep(cep:String): EnderecoVo {
+override fun buscarViaCep(cep:String): EnderecoVo {
         validacaoCep(cep)
 
         var viacep = this.findByCep(cep);

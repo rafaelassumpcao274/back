@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 @Tag(name = "Acabamento Endpoint")
 @RestController
 @RequestMapping("/acabamento")
-class AcabementoController {
+class SAcabementoController {
 
     @Autowired
     private lateinit var service: AcabamentoService;

@@ -24,7 +24,7 @@ data class Empresa (
 
     @OneToOne(optional=false)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
-    var endereco:Endereco = Endereco(),
+    var endereco:Endereco? = Endereco(),
 
     @Column(name = "contato", nullable = true, length = 100)
     var contato:String?="",

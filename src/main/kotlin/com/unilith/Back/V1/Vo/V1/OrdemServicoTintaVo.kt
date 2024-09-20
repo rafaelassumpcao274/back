@@ -8,6 +8,6 @@ data class OrdemServicoTintaVo(
     var id: Long = 0,
     var ordemServico: OrdemServicoVo = OrdemServicoVo(),
     var tinta: TintaVo = TintaVo(),
-    var freteVerso: FrenteVerso = FrenteVerso.FRENTE
+    var frenteVerso: FrenteVerso = FrenteVerso.FRENTE
 
 ):AuditoriaVo()
